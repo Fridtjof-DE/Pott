@@ -1,0 +1,2 @@
+# Pott
+ A discord bot

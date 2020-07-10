@@ -1,0 +1,8 @@
+tk\fridtjof\pott\ConfigManager.class
+tk\fridtjof\pott\listeners\GuildMsg.class
+tk\fridtjof\pott\cmds\ext\UuidCmd.class
+tk\fridtjof\pott\cmds\ext\HeadCmd.class
+tk\fridtjof\pott\cmds\ext\PingCmd.class
+tk\fridtjof\pott\cmds\GuildCommand.class
+tk\fridtjof\pott\Pott.class
+tk\fridtjof\pott\cmds\ext\MonitorCmd.class
