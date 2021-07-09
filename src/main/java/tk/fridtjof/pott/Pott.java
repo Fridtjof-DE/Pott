@@ -52,6 +52,8 @@ public class Pott {
         builder.setStatus(OnlineStatus.ONLINE);
         builder.setActivity(Activity.watching(config.getString("motd")));
 
+        logger.debug("test1");
+        System.out.println("test3");
         builder.addEventListeners(new GuildMsg());
 
         try {
