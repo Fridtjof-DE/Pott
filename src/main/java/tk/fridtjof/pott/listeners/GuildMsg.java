@@ -3,10 +3,10 @@ package tk.fridtjof.pott.listeners;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import tk.fridtjof.pott.Pott;
-import tk.fridtjof.pott.cmds.ext.HeadCmd;
-import tk.fridtjof.pott.cmds.ext.MonitorCmd;
-import tk.fridtjof.pott.cmds.ext.PingCmd;
-import tk.fridtjof.pott.cmds.ext.UuidCmd;
+import tk.fridtjof.pott.cmds.HeadCmd;
+import tk.fridtjof.pott.cmds.MonitorCmd;
+import tk.fridtjof.pott.cmds.PingCmd;
+import tk.fridtjof.pott.cmds.UuidCmd;
 
 public class GuildMsg extends ListenerAdapter {
 
@@ -15,6 +15,7 @@ public class GuildMsg extends ListenerAdapter {
 
     public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
 
+        System.out.println("test2");
         new PingCmd("!ping", event);
         new HeadCmd("!head", event);
         new UuidCmd("!uuid", event);
