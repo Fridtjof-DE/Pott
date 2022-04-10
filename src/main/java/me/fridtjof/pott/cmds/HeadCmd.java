@@ -1,16 +1,16 @@
-package tk.fridtjof.pott.cmds;
+package me.fridtjof.pott.cmds;
 
+import me.fridtjof.pott.Pott;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
-import tk.fridtjof.pott.Pott;
-import tk.fridtjof.puddingapi.general.utils.MojangAPI;
-import tk.fridtjof.puddingapi.jda.GuildCommand;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import me.fridtjof.puddingapi.general.utils.MojangAPI;
+import me.fridtjof.puddingapi.jda.GuildCommand;
 
 import java.awt.*;
 
 public class HeadCmd extends GuildCommand {
 
-    public HeadCmd(String commandName, GuildMessageReceivedEvent event) {
+    public HeadCmd(String commandName, MessageReceivedEvent event) {
         super(commandName, event);
     }
 
@@ -39,7 +39,8 @@ public class HeadCmd extends GuildCommand {
                 } else {
                     embedBuilder.setImage("https://mc-heads.net/head/" + uuid + "/128.png");
                     embedBuilder.setAuthor("Head render of " + arguments()[1], "https://discord.gg/XzZZAme", pott.config.getString("icon"));
-                    event.getChannel().sendMessage(embedBuilder.build()).queue();
+                    event.getChannel().sendMessage("test");
+                    //event.getChannel().sendMessage(embedBuilder.build()).queue();
                 }
             }
         }

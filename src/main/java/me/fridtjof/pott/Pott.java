@@ -1,21 +1,30 @@
-package tk.fridtjof.pott;
+package me.fridtjof.pott;
 
-import net.dv8tion.jda.api.sharding.DefaultShardManagerBuilder;
+import me.fridtjof.pott.listeners.GuildMessage;
+import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import tk.fridtjof.pott.listeners.GuildMsg;
-import tk.fridtjof.puddingapi.general.io.Config;
+import me.fridtjof.puddingapi.general.io.Config;
 
 import javax.security.auth.login.LoginException;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class Pott {
+
+    private String[] args;
 
     private static Pott instance;
     public static Pott getInstance() {
         return instance;
     }
+
+    public static JDA shardMan;
+    public static JDABuilder builder;
 
     long startTime;
     public Logger logger = LoggerFactory.getLogger(Pott.class);
@@ -26,6 +35,7 @@ public class Pott {
     }
 
     public Pott() {
+        this.args = args;
         instance = this;
         logger.info("Starting Pott!");
         logger.info("Debug: " + logger.isDebugEnabled());
@@ -35,10 +45,10 @@ public class Pott {
     private void init() {
         logger.info("Initialization...");
         new ConfigManager(config, logger);
-        if(config.getBoolean("license")) {
+        if(config.getBoolean("eula")) {
             start();
         } else {
-            logger.error("You need to agree to the license in order to run the bot. Go to config.pddg and set it to true.");
+            logger.error("You need to agree to the eula in order to run the bot. Go to config.pddg and set it to true.");
         }
     }
 
@@ -46,18 +56,13 @@ public class Pott {
         logger.info("Building the bot...");
         startTime = System.currentTimeMillis();
 
-        @SuppressWarnings("deprecation")
-        DefaultShardManagerBuilder builder = new DefaultShardManagerBuilder();
-        builder.setToken(config.getString("token"));
+        builder = JDABuilder.createDefault(config.getString("token"));
         builder.setStatus(OnlineStatus.ONLINE);
         builder.setActivity(Activity.watching(config.getString("motd")));
-
-        logger.debug("test1");
-        System.out.println("test3");
-        builder.addEventListeners(new GuildMsg());
+        builder.addEventListeners(new GuildMessage());
 
         try {
-            builder.build();
+            shardMan = builder.build();
         } catch (LoginException loginException) {
             logger.error("Login failed!");
             loginException.printStackTrace();
@@ -65,5 +70,25 @@ public class Pott {
 
         long bootTime = System.currentTimeMillis() - startTime;
         logger.info("Bot successfully build in " + bootTime + " ms!");
+
+        stop();
+    }
+
+
+    public void stop() {
+        while(true) {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            try {
+                if(reader.readLine().equals("stop") || reader.readLine().equals("stop")) {
+                    reader.close();
+                    builder.setStatus(OnlineStatus.OFFLINE);
+                    logger.info("Stopping...");
+                    shardMan.shutdownNow();
+                    logger.info("Shutdown erfolgreich");
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

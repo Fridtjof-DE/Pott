@@ -1,11 +1,11 @@
-package tk.fridtjof.pott.cmds;
+package me.fridtjof.pott.cmds;
 
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
-import tk.fridtjof.puddingapi.jda.GuildCommand;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import me.fridtjof.puddingapi.jda.GuildCommand;
 
 public class MonitorCmd extends GuildCommand {
 
-    public MonitorCmd(String commandName, GuildMessageReceivedEvent event) {
+    public MonitorCmd(String commandName, MessageReceivedEvent event) {
         super(commandName, event);
     }
 

@@ -41,7 +41,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>tk.fridtjof.pott.Pott</mainClass>
+                            <mainClass>me.fridtjof.pott.Pott</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -74,7 +74,7 @@
         <dependency>
             <groupId>net.dv8tion</groupId>
             <artifactId>JDA</artifactId>
-            <version>4.2.0_175</version>
+            <version>5.0.0-alpha.9</version>
         </dependency>
         <dependency>
             <groupId>com.neovisionaries</groupId>

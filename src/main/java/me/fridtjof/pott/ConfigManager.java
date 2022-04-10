@@ -1,7 +1,7 @@
-package tk.fridtjof.pott;
+package me.fridtjof.pott;
 
 import org.slf4j.Logger;
-import tk.fridtjof.puddingapi.general.io.Config;
+import me.fridtjof.puddingapi.general.io.Config;
 
 public class ConfigManager {
 
@@ -16,7 +16,7 @@ public class ConfigManager {
 
     private void setDefaults() {
         logger.info("Settings configuration defaults...");
-        config.setDefault("license", false);
+        config.setDefault("eula", false);
         config.setDefault("token", "your token");
         config.setDefault("motd", "over the databases");
         config.setDefault("prefix", "!");

@@ -1,14 +1,15 @@
-package tk.fridtjof.pott.cmds;
+package me.fridtjof.pott.cmds;
 
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
-import tk.fridtjof.pott.Pott;
-import tk.fridtjof.puddingapi.general.utils.MojangAPI;
-import tk.fridtjof.puddingapi.general.utils.UUIDConverter;
-import tk.fridtjof.puddingapi.jda.GuildCommand;
+import me.fridtjof.pott.Pott;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import me.fridtjof.puddingapi.general.utils.MojangAPI;
+import me.fridtjof.puddingapi.general.utils.UUIDConverter;
+import me.fridtjof.puddingapi.jda.GuildCommand;
 
 public class UuidCmd extends GuildCommand {
 
-    public UuidCmd(String commandName, GuildMessageReceivedEvent event) {
+    public UuidCmd(String commandName, MessageReceivedEvent event) {
         super(commandName, event);
     }
 
