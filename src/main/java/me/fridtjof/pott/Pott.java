@@ -5,6 +5,7 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.requests.GatewayIntent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import me.fridtjof.puddingapi.general.io.Config;
@@ -29,6 +30,7 @@ public class Pott {
     long startTime;
     public Logger logger = LoggerFactory.getLogger(Pott.class);
     public Config config = new Config("", "config");
+    public Config countingData = new Config("", "counting_data");
 
     public static void main(String[] args) {
         new Pott();
@@ -57,16 +59,12 @@ public class Pott {
         startTime = System.currentTimeMillis();
 
         builder = JDABuilder.createDefault(config.getString("token"));
+        builder.enableIntents(GatewayIntent.GUILD_MESSAGES, GatewayIntent.MESSAGE_CONTENT, GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_PRESENCES);
         builder.setStatus(OnlineStatus.ONLINE);
         builder.setActivity(Activity.watching(config.getString("motd")));
         builder.addEventListeners(new GuildMessage());
 
-        try {
-            shardMan = builder.build();
-        } catch (LoginException loginException) {
-            logger.error("Login failed!");
-            loginException.printStackTrace();
-        }
+        shardMan = builder.build();
 
         long bootTime = System.currentTimeMillis() - startTime;
         logger.info("Bot successfully build in " + bootTime + " ms!");
